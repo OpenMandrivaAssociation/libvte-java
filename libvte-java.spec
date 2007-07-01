@@ -1,7 +1,7 @@
 Summary:        Wrapper library for GNOME VTE
 Name:           libvte-java 
 Version:        0.12.3
-Release:        %mkrel 1
+Release:        %mkrel 2
 Epoch:          0
 URL:            http://java-gnome.sourceforge.net/
 Source0:        http://fr2.rpmfind.net/linux/gnome.org/sources/libvte-java/0.12/libvte-java-%{version}.tar.bz2
@@ -10,14 +10,9 @@ Source2:        http://fr2.rpmfind.net/linux/gnome.org/sources/libvte-java/0.12/
 Source3:        http://fr2.rpmfind.net/linux/gnome.org/sources/libvte-java/0.12/libvte-java-0.12.3.news
 Source4:        java-gnome-macros.tar.bz2
 License:        LGPL
-Group:          Development/Java
-Requires(post): /sbin/ldconfig
-Requires(postun): /sbin/ldconfig
-Requires:       glib-java
-Requires:       libgtk-java
-Requires:       vte
+Group:          System/Libraries
 BuildRequires:  docbook-utils
-BuildRequires:  gcc-java >= 0:4.1.1
+BuildRequires:  java-gcj-compat-devel
 BuildRequires:  glib-java-devel >= 0:0.4.2
 BuildRequires:  java-devel >= 0:1.4.2
 BuildRequires:  jpackage-utils
@@ -33,13 +28,13 @@ libvte-java is a Java wrapper library for the GNOME VTE library
 which allows access to the terminal widget from Java.
 
 %package        devel
-Summary:        Compressed Java source files for %{name}
+Summary:        Development files for %{name}
 Group:          Development/Java
 Requires:       %{name} = %{epoch}:%{version}
+Conflicts:      libvte-java < 0.12.3-2
 
 %description    devel
-Compressed Java source for %{name}. This is useful if you are developing
-applications with IDEs like Eclipse.
+Development files for %{name}.
 
 %prep
 %setup -q
@@ -55,6 +50,8 @@ export JAVA=%{java}
 export JAVAC=%{javac}
 export JAR=%{jar}
 export JAVADOC=%{javadoc}
+export GCJ=%{gcj}
+export CPPFLAGS="-I%{java_home}/include -I%{java_home}/include/linux"
 %{configure2_5x} --with-jardir=%{_javadir}
 %{make}
 
@@ -88,14 +85,16 @@ popd
 
 %files
 %defattr(-,root,root,-)
-%doc doc/api AUTHORS ChangeLog COPYING INSTALL NEWS README 
-%{_libdir}/*so*
-%{_libdir}/*la
-%{_libdir}/pkgconfig/*
+%doc AUTHORS ChangeLog COPYING INSTALL NEWS README 
+%{_libdir}/libvtejava-*.so
+%{_libdir}/libvtejni-*.so
 %{_datadir}/java/*.jar
 
 %files devel
 %defattr(-,root,root)
+%doc doc/api
 %{_datadir}/java/*.zip
-
-
+%{_libdir}/pkgconfig/*
+%{_libdir}/libvtejava.so
+%{_libdir}/libvtejni.so
+%{_libdir}/*la

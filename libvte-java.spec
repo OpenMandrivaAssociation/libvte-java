@@ -21,6 +21,7 @@ BuildRequires:  libgnomeui2-devel
 BuildRequires:  libgnomecanvas2-devel
 BuildRequires:  pkgconfig
 BuildRequires:  vte-devel
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description 
 libvte-java is a Java wrapper library for the GNOME VTE library

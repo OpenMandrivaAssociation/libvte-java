@@ -1,7 +1,7 @@
 Summary:        Wrapper library for GNOME VTE
 Name:           libvte-java 
 Version:        0.12.3
-Release:        %mkrel 5
+Release:        %mkrel 6
 Epoch:          0
 URL:            http://java-gnome.sourceforge.net/
 Source0:        http://fr2.rpmfind.net/linux/gnome.org/sources/libvte-java/0.12/libvte-java-%{version}.tar.bz2

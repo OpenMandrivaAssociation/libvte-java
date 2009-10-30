@@ -1,7 +1,7 @@
 Summary:        Wrapper library for GNOME VTE
 Name:           libvte-java 
 Version:        0.12.3
-Release:        %mkrel 6
+Release:        %mkrel 7
 Epoch:          0
 URL:            http://java-gnome.sourceforge.net/
 Source0:        http://fr2.rpmfind.net/linux/gnome.org/sources/libvte-java/0.12/libvte-java-%{version}.tar.bz2
@@ -39,10 +39,6 @@ Development files for %{name}.
 %prep
 %setup -q
 %setup -q -T -D -a 4
-%{__aclocal} -I macros --force
-%{__autoconf} --force
-%{__automake} --copy --force-missing
-%{__libtoolize} --copy --force
 
 %build
 export CLASSPATH=
@@ -51,9 +47,12 @@ export JAVAC=%{javac}
 export JAR=%{jar}
 export JAVADOC=%{javadoc}
 export GCJ=%{gcj}
+# workaround:
+# libtool does not use pic_flag when compiling, so we have to force it. 
+export GCJFLAGS="-O2 -fPIC" 
 export CPPFLAGS="-I%{java_home}/include -I%{java_home}/include/linux"
 %{configure2_5x} --with-jardir=%{_javadir}
-%{make}
+make
 
 # pack up the java source
 jarversion=$(echo -n %{version} | cut -d . -f -2)

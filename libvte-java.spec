@@ -95,7 +95,7 @@ popd
 
 %files devel
 %defattr(-,root,root)
-%doc doc/api
+%doc %{_docdir}/%{name}-%{version}
 %{_datadir}/java/*.zip
 %{_libdir}/pkgconfig/*
 %{_libdir}/libvtejava.so

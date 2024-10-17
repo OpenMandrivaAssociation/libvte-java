@@ -3,7 +3,7 @@ Name:           libvte-java
 Version:        0.12.3
 Release:        %mkrel 8
 Epoch:          0
-URL:            http://java-gnome.sourceforge.net/
+URL:            https://java-gnome.sourceforge.net/
 Source0:        http://fr2.rpmfind.net/linux/gnome.org/sources/libvte-java/0.12/libvte-java-%{version}.tar.bz2
 Source1:        http://fr2.rpmfind.net/linux/gnome.org/sources/libvte-java/0.12/libvte-java-0.12.3.changes
 Source2:        http://fr2.rpmfind.net/linux/gnome.org/sources/libvte-java/0.12/libvte-java-0.12.3.md5sum
